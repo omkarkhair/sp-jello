@@ -1,2 +1,2 @@
 # sp-rest
-Javascript REST API library for Sharepoint
+Look away. This is work in progress
