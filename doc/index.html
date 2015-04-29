@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scotch for Sharepoint</title>
+        <script src="jquery-1.11.2.min.js"></script>
+        <script src="../lib/scotch.js"></script>
+    </head>
+    <body>
+        <h1>Scotch for Sharepoint</h1>
+        <p>I've tried to make this quick and dirty. You can find the usage for Scotch in the source of this page.</p>
+
+        <script>
+            var TaskList = new Scotch({
+                name: "TaskList",
+                contentType: ""
+            });
+
+
+            // To add item to list
+            TaskList.add({
+                Title: "Get eggs",
+                Status: true
+            }).then(function (resp) {
+                console.log("Successfully added to list");
+            }, function (err) {
+                console.error("Failed because", err);
+            });
+        </script>
+    </body>
+</html>
