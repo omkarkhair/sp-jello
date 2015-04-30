@@ -10,17 +10,13 @@
         <p>I've tried to make this quick and dirty. You can find the usage for Scotch in the source of this page.</p>
 
         <script>
-            var TaskList = new Scotch({
+            var TaskList = new Scotch("my-sharepoint-portal",{
                 name: "TaskList",
-                contentType: ""
+                contentType: "ListContentType"
             });
 
-
-            // To add item to list
-            TaskList.add({
-                Title: "Get eggs",
-                Status: true
-            }).then(function (resp) {
+            // To get items from list
+            TaskList.get().then(function (resp) {
                 console.log("Successfully got list", resp);
             }, function (err) {
                 console.error("Failed because", err);
