@@ -67,7 +67,7 @@ function(err) {
 });
 ```
 
-### Update list item `Jello.remove`
+### Delete list item `Jello.remove`
 ##### accepts
 `ID`: List item ID
 `etag`: `optional` Provides a way to verify that the object being changed has not been changed since it was last retrieved.
