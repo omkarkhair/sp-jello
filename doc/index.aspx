@@ -39,6 +39,15 @@
                 	Title: (new Date()).getTime().toString()
                 }).then(function(){
                 	console.log("Successfully updated");
+                	
+                	// Try getting the first item after update
+                	TaskList.get(resp.d.results[0].ID).then(function(updatedItem){
+                		console.log("Updated item", updatedItem);
+                	},
+                	function (err) {
+                		console.log("Error fetching one item", err);
+                	});
+                	
                 },
                 function(err) {
                 	console.log("Err updating", err);
