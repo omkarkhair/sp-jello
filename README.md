@@ -100,5 +100,19 @@ function(err) {
 });
 ```
 
+### Query list items `Jello.query`
+##### accepts
+`filter`: OData filter string
+##### returns
+jQuery promise object.
+```javascript
+TaskList.query("$filter=Status eq 1&$top=500").then(function(results){
+	console.log("Query results", results);
+},
+function(err) {
+	console.log("Err querying", err);
+});
+```
+
 ###### Note
 This code is available to you as is without an warranties. It can do wonders, or shatter your dreams to pieces. The developers take no liability.
