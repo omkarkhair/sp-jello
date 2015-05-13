@@ -16,9 +16,9 @@ var TaskList = new Jello("https://contoso.sharepoint/sites/mysubsite",{
 });
 ```
 
-### Get list item(s) `Jello.get`
+### Get list items `Jello.get`
 ##### accepts
-`ID`: `optional` If item's `ID` is provided `get` will return a single list item.
+`top`: `optional` If top is passed, those number of results will be queried from list. Uses `$top`.
 ##### returns
 jQuery promise object.
 ```javascript
@@ -28,7 +28,22 @@ TaskList.get().then(function (resp) {
     console.error("Failed because", err);
 });
 
-TaskList.get(12).then(function(item){
+// Gets 500 items
+TaskList.get(500).then(function(items){
+	console.log("Items", items);
+},
+function (err) {
+	console.log("Error fetching items", err);
+});
+```
+
+### Get list item `Jello.getById`
+##### accepts
+`ID`: If item's `ID` is provided `get` will return a single list item.
+##### returns
+jQuery promise object.
+```javascript
+TaskList.getById(12).then(function(item){
 	console.log("Item", item);
 },
 function (err) {
