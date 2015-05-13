@@ -39,10 +39,10 @@ var Jello = function (siteUrl, listOptions) {
             
             return dfd.promise();
         },
-        get: function (id) {
+        get: function (top) {
             var dfd = $.Deferred();
             
-            var filter = ( id ) ? "(" + id + ")" : "" ;
+            var filter = ( top ) ? "?$top=" + top : "" ;
             
             $.ajax({
                 type: 'GET',
@@ -50,6 +50,26 @@ var Jello = function (siteUrl, listOptions) {
                     "accept": "application/json;odata=verbose"
                 },
                 url: siteUrl + "/_api/web/lists/getbytitle('" + listOptions.name + "')/items" + filter
+            }).done(function (resp) {
+                dfd.resolve(resp);
+            }).fail(function (err) {
+                dfd.reject(err);
+            });
+
+            return dfd.promise();
+        },
+        getById: function (id) {
+            var dfd = $.Deferred();
+            
+            if (!id)
+                throw("Provided ID is not valid");
+            
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    "accept": "application/json;odata=verbose"
+                },
+                url: siteUrl + "/_api/web/lists/getbytitle('" + listOptions.name + "')/items(" + id + ")"
             }).done(function (resp) {
                 dfd.resolve(resp);
             }).fail(function (err) {
@@ -152,6 +172,25 @@ var Jello = function (siteUrl, listOptions) {
                 dfd.reject(err);
             });
             
+            return dfd.promise();
+        },
+        query: function (filter) {
+            var dfd = $.Deferred();
+            
+            filter = ( filter ) ? "?" + filter : "" ;
+            
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    "accept": "application/json;odata=verbose"
+                },
+                url: siteUrl + "/_api/web/lists/getbytitle('" + listOptions.name + "')/items" + filter
+            }).done(function (resp) {
+                dfd.resolve(resp);
+            }).fail(function (err) {
+                dfd.reject(err);
+            });
+
             return dfd.promise();
         }
     };
