@@ -1,5 +1,5 @@
 # Jello for Sharepoint
-This is a quick and dirty library, built to consume Sharepoint REST API for list manipulation. You are bound to notice a few issues or limitations. Please use the github issue list to add any issues or features you would like to have in Jello.
+Jello is built to consume Sharepoint REST API for list manipulation. I try my best to keep each and every release clean by shipping few but robust features. You are still bound to notice a few issues or limitations. Please use the github issue list to add any issues or features you would like to have in Jello.
 
 ## Why use Jello?
 Jello is designed to make developing on Sharepoint lists using REST API fun. It is attempt to help developers build apps (esp. single page applications) that work with Sharepoint lists focus on business logic.
