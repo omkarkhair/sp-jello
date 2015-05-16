@@ -39,18 +39,72 @@ var Jello = function (siteUrl, listOptions) {
             
             return dfd.promise();
         },
-        get: function (top) {
+        get: function (top, url) {
+            var self = this;
             var dfd = $.Deferred();
+            var filter = "";
             
-            var filter = ( top ) ? "?$top=" + top : "" ;
+            // If filter is set, execute
+            if (self.filterObj.select || self.filterObj.filter || self.filterObj.expand || self.filterObj.orderBy)
+            {
+                if (self.filterObj.expand)
+                    filter = (filter.length > 0) ? filter + "&" + self.filterObj.expand : filter + "?" + self.filterObj.expand;
+                
+                if (self.filterObj.select)
+                    filter = (filter.length > 0) ? filter + "&" + self.filterObj.select : filter + "?" + self.filterObj.select;
+
+                if (self.filterObj.filter)
+                    filter = (filter.length > 0) ? filter + "&" + self.filterObj.filter : filter + "?" + self.filterObj.filter;
+                
+                if (self.filterObj.orderBy)
+                    filter = (filter.length > 0) ? filter + "&" + self.filterObj.orderBy : filter + "?" + self.filterObj.orderBy;
+
+                if (top)
+                    filter = (filter.length > 0) ? filter + "&$top=" + top : filter + "?$top=" + top;
+                
+                // Reset the filter
+                self.filterObj = {
+                    filter: null,
+                    expand: null,
+                    select: null,
+                    orderBy: null
+                };
+                console.log("Query", filter);
+            }
+            else
+            {
+                var filter = ( top ) ? "?$top=" + top : "" ;
+            }
             
+            url = (url) ? url : siteUrl + "/_api/web/lists/getbytitle('" + listOptions.name + "')/items" + filter;
             $.ajax({
                 type: 'GET',
                 headers: {
                     "accept": "application/json;odata=verbose"
                 },
-                url: siteUrl + "/_api/web/lists/getbytitle('" + listOptions.name + "')/items" + filter
+                url: url
             }).done(function (resp) {
+                // Add paging methods
+                resp.next = function () {
+                    var dfd_next = $.Deferred();
+                    self.get(null, resp.d.__next).then(function (next_res) {
+                        dfd_next.resolve(next_res);
+                    }, function (err) {
+                        dfd_next.reject(err);
+                    });
+                    return dfd_next.promise();
+                }
+                
+                resp.prev = function () {
+                    var dfd_next = $.Deferred();
+                    self.get(null, resp.d.__prev).then(function (prev_res) {
+                        dfd_next.resolve(prev_res);
+                    }, function (err) {
+                        dfd_next.reject(err);
+                    });
+                    return dfd_next.promise();
+                }
+                
                 dfd.resolve(resp);
             }).fail(function (err) {
                 dfd.reject(err);
@@ -192,6 +246,33 @@ var Jello = function (siteUrl, listOptions) {
             });
 
             return dfd.promise();
+        },
+        // Methods chains to follow
+        filterObj: {
+            filter: null,
+            expand: null,
+            select: null,
+            orderBy: null
+        },
+        where: function (filter) {
+            var self = this;
+            self.filterObj.filter = "$filter=" + filter;
+            return self;
+        },
+        expand: function (filter) {
+            var self = this;
+            self.filterObj.expand = "$expand=" + filter; 
+            return self;
+        },
+        select: function (filter) {
+            var self = this;
+            self.filterObj.select = "$select=" + filter; 
+            return self;
+        },
+        orderBy: function (filter) {
+            var self = this;
+            self.filterObj.orderBy = "$orderby=" + filter; 
+            return self;
         }
     };
 }
