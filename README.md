@@ -142,4 +142,4 @@ TaskList.expand('AssignedTo/Title')
 
 For OData query reference, check https://msdn.microsoft.com/en-us/library/office/fp142385.aspx
 ###### Note
-This code is available to you as is without an warranties. It can do wonders, or shatter your dreams to pieces. The developers take no liability.
+This code is available to you as is without any warranties. It can do wonders, or shatter your dreams to pieces. The developers take no liability.
