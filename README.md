@@ -123,7 +123,10 @@ function(err) {
 Adopting a developer friendly pattern to make list queries. From Jello 0.3 method chaining is supported.
 
 ```javascript
-TaskList.expand('AssignedTo/Title').select("Title,Status,AssignedToId,AssignedTo/Title").where("Status eq 0").get(4).then(function(res){
+TaskList.expand('AssignedTo/Title')
+	.select("Title,Status,AssignedToId,AssignedTo/Title")
+	.where("Status eq 0").get(4)
+	.then(function(res){
     console.log("Method chain result", res);
 }, function (err) {
     console.log("Error method chain", err);
