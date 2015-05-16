@@ -4,6 +4,11 @@ Jello is built to consume Sharepoint REST API for list manipulation. I try my be
 ## Why use Jello?
 Jello is designed to make developing on Sharepoint lists using REST API fun. It is attempt to help developers build apps (esp. single page applications) that work with Sharepoint lists focus on business logic.
 
+Top features
+- Automated call for X-RequestDigest
+- Method chaining for list queries
+- Easily page through list query results (paging support)
+
 ## Getting started
 Jello is easy to use. With the first few releases we are focusing on REST API with Sharepoint lists only. Jello has dependencies on `SP.js` and `jquery`. Make sure you have them loaded in your page before starting to consume Jello.
 
@@ -114,5 +119,24 @@ function(err) {
 });
 ```
 
+## Method chaining
+Adopting a developer friendly pattern to make list queries. From Jello 0.3 method chaining is supported.
+
+```javascript
+TaskList.expand('AssignedTo/Title').select("Title,Status,AssignedToId,AssignedTo/Title").where("Status eq 0").get(4).then(function(res){
+    console.log("Method chain result", res);
+}, function (err) {
+    console.log("Error method chain", err);
+});
+```
+`Jello.get` executes the constructed query. The `top` parameter can be passed to specific the number of items desired.
+
+###Supported methods
+- `Jello.where` appends `$filter`
+- `Jello.select` appends `$select`
+- `Jello.orderBy` appends `$orderby`
+- `Jello.expand` appends `$expand`
+
+For OData query reference, check https://msdn.microsoft.com/en-us/library/office/fp142385.aspx
 ###### Note
 This code is available to you as is without an warranties. It can do wonders, or shatter your dreams to pieces. The developers take no liability.
