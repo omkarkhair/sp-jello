@@ -10,7 +10,7 @@ Top features
 - Easily page through list query results (paging support)
 
 ## Getting started
-Jello is easy to use. With the first few releases we are focusing on REST API with Sharepoint lists only. Jello has dependencies on `SP.js` and `jquery`. Make sure you have them loaded in your page before starting to consume Jello.
+Jello is easy to use. With the first few releases we are focusing on REST API with Sharepoint lists only. Jello has a dependency on `jQuery`. Make sure you have jQuery loaded in your page before starting to consume Jello.
 
 ### Initialize on a list
 To initialize Jello on a Sharepoint list, you need to provide the `siteUrl` and `listOptions` respectively. The returned Jello object can then be used to perform operations on the list.
