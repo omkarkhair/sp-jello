@@ -81,7 +81,7 @@ TaskList.add({
 jQuery promise object.
 ```javascript
 TaskList.update(12, {
-	Title: ("Get 8 eggs"
+	Title: "Get 8 eggs"
 }).then(function(){
 	console.log("Successfully updated");
 },
