@@ -12,16 +12,21 @@ Top features
 ## Getting started
 Jello is easy to use. With the first few releases we are focusing on REST API with Sharepoint lists only. Jello has a dependency on `jQuery`. Make sure you have jQuery loaded in your page before starting to consume Jello.
 
-### Initialize on a list
-To initialize Jello on a Sharepoint list, you need to provide the `siteUrl` and `listOptions` respectively. The returned Jello object can then be used to perform operations on the list.
+### Initialize on a site
+To initialize Jello on a Sharepoint site, you need to provide the `siteUrl`. The returned Jello object can then be used to perform operations on the web, list, list items etc.
 ```javascript
-var TaskList = new Jello("https://contoso.sharepoint/sites/mysubsite",{
-    name: "TaskList", // list name
-    contentType: "SP.Data.TaskListListItem" // list item content type
+var Jello = new Jello("https://contoso.sharepoint/sites/mysubsite");
+```
+# Perform operations on list items.
+To perform operations on list items you need to provide the list name and list options. The returned Jello object can then be used to perform operations on list items.
+```javascript
+var TaskList = Jello.ListItems({
+    name: "TaskList",
+    contentType: "SP.Data.TaskListListItem"
 });
 ```
 
-### Get list items `Jello.get`
+### Get list items `Jello.ListItems.get`
 ##### accepts
 `top`: `optional` If top is passed, those number of results will be queried from list. Uses `$top`.
 ##### returns
@@ -42,7 +47,7 @@ function (err) {
 });
 ```
 
-### Get list item `Jello.getById`
+### Get list item `Jello.ListItems.getById`
 ##### accepts
 `ID`: If item's `ID` is provided `get` will return a single list item.
 ##### returns
@@ -56,7 +61,7 @@ function (err) {
 });
 ```
 
-### Create list item `Jello.add`
+### Create list item `Jello.ListItems.add`
 ##### accepts
 `item`: Object denoting list item to be added
 ##### returns
@@ -72,7 +77,7 @@ TaskList.add({
 });
 ```
 
-### Update list item `Jello.update`
+### Update list item `Jello.ListItems.update`
 ##### accepts
 `ID`: List item ID
 `item`: Object carrying properties that need to be updated along with their desired values
@@ -81,7 +86,7 @@ TaskList.add({
 jQuery promise object.
 ```javascript
 TaskList.update(12, {
-	Title: ("Get 8 eggs"
+	Title: "Get 8 eggs"
 }).then(function(){
 	console.log("Successfully updated");
 },
@@ -90,7 +95,7 @@ function(err) {
 });
 ```
 
-### Delete list item `Jello.remove`
+### Delete list item `Jello.ListItems.remove`
 ##### accepts
 `ID`: List item ID
 `etag`: `optional` Provides a way to verify that the object being changed has not been changed since it was last retrieved.
@@ -105,7 +110,7 @@ function(err) {
 });
 ```
 
-### Query list items `Jello.query`
+### Query list items `Jello.ListItems.query`
 ##### accepts
 `filter`: OData filter string
 ##### returns
