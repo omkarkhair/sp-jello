@@ -12,11 +12,23 @@ Top features
 ## Getting started
 Jello is easy to use. With the first few releases we are focusing on REST API with Sharepoint lists only. Jello has a dependency on `jQuery`. Make sure you have jQuery loaded in your page before starting to consume Jello.
 
+### Get it from NPM
+```npm install sp-jello```
+
+*PS: note that if you are using Jello from NPM then you do not need to include jquery as Jello has a listed dependency to it.*
+
 ### Initialize on a site
 To initialize Jello on a Sharepoint site, you need to provide the `siteUrl`. The returned Jello object can then be used to perform operations on the web, list, list items etc.
 ```javascript
 var Jello = new Jello("https://contoso.sharepoint/sites/mysubsite");
 ```
+
+### Require it
+```javascript
+const JelloLib = require('sp-jello');
+var Jello = new JelloLib("https://contoso.sharepoint/sites/mysubsite");
+```
+
 # Perform operations on list items.
 To perform operations on list items you need to provide the list name and list options. The returned Jello object can then be used to perform operations on list items.
 ```javascript
