@@ -277,3 +277,4 @@ var Jello = function(siteUrl) {
         };
     };
 };
+module.exports = Jello
