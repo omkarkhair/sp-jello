@@ -1,0 +1,35 @@
+{
+  "name": "sp-jello",
+  "version": "0.3.3",
+  "description": "REST Api library for SharePoint",
+  "main": "bin/jello-0.3.3.min.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omkarkhair/sp-jello"
+  },
+  "keywords": [
+    "SharePoint",
+    "sp-jello",
+    "SP",
+    "REST"
+  ],
+  "author": "Omkar Khair",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omkarkhair/sp-jello/issues"
+  },
+  "homepage": "https://github.com/omkarkhair/sp-jello#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-minify": "0.0.14"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
